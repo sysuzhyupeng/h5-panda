@@ -80,7 +80,7 @@ var fullPage = {
 		其实是容器content借助transform属性进行纵向移动
 	*/
 	_goToPage: function(index, speed){
-		if(index === this._currIndex) return;
+		// if(index === this._currIndex) return;
 		var beginY = this._currPageY,
 			//要移动到的Y
 			endY = (index - 1) * this._pageHeight,
@@ -102,7 +102,7 @@ var fullPage = {
 		}
 	},
 	_onMove: function(index){
-		if(index === this._currIndex) return;
+		// if(index === this._currIndex) return;
 		//第index - 1页增加active和ani类名(开始进行css动画)
 		this._pageEls.removeClass('active ani')
 		this._pageEls.eq(index - 1).addClass('active').addClass('ani');

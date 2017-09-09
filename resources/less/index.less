@@ -17,6 +17,10 @@ body {
   margin-left : -18px;
   background  : url(../img/arrow.png) center center;
   background-size : 100% 100%;
+  /*
+    infinite不停止，不断重复
+    alternate交替的，即动画.5s，暂停.5s
+  */
   -webkit-animation : jump 0.5s infinite alternate;
 
   @-webkit-keyframes jump {
@@ -61,22 +65,12 @@ body {
 
 .page1 {
   background : url(../img/p1-bg.jpg);
-
-  .word {
-    width       : 132px;
-    height      : 391px;
-    margin-left : -66px;
-    margin-top  : -400px;
-    background  : url(../img/p1-word.png) center center;
-    background-size : 100% 100%;
-  }
-
   .total {
     width       : 395px;
     height      : 462px;
     margin-left : -213px;
     margin-top  : -80px;
-
+    //熊猫背景
     .panda {
       width       : 378px;
       height      : 342px;
@@ -85,7 +79,7 @@ body {
       background  : url(../img/p1-panda.png) center center;
       background-size : 100% 100%;
     }
-
+    //碗背景
     .wan {
       width       : 149px;
       height      : 193px;
@@ -95,22 +89,38 @@ body {
       background-size : 100% 100%;
     }
   }
-
+  .word {
+    width       : 132px;
+    height      : 391px;
+    margin-left : -66px;
+    margin-top  : -400px;
+    background  : url(../img/p1-word.png) center center;
+    background-size : 100% 100%;
+  }
+  /*
+    word不设动画属性之前定位在正中间
+  */
   .word {
     opacity : 0;
+    //向下移动
     -webkit-transform  : translateY(-50px);
     -webkit-transition : all 0.5s 1s;
   }
   &.active .word {
+    /*
+      page1元素加上active属性之后，文字使用translateY进行入场
+      即从-50到0，从上到下
+    */
     opacity : 1;
     -webkit-transform  : translateY(0);
     -webkit-transition : all 1s 0.5s;
   }
 
   .total {
+    //设置旋转元素的基点位置
     -webkit-transform-origin : center bottom;
   }
-  // &.ani .total {
+  //包含熊猫和碗的容器，容器进行keyframe动画设置
   .total {
     -webkit-animation : swingtotal 1.5s linear infinite;
   }
@@ -118,18 +128,17 @@ body {
   .wan {
     -webkit-transform-origin : center bottom;
   }
-  // &.ani .wan {
   .wan {
     -webkit-animation : swingwan 1s linear infinite;
   }
-
+  //在1.5秒钟进行左右.8度的旋转
   @-webkit-keyframes swingtotal {
     0%   { -webkit-transform : rotate(0deg);   }
     25%  { -webkit-transform : rotate(-0.8deg); }
     75%  { -webkit-transform : rotate(0.8deg);  }
     100% { -webkit-transform : rotate(0deg);   }
   }
-
+  //碗在容器旋转的基础上再进行旋转，达到一个交错的效果
   @-webkit-keyframes swingwan {
     0%   { -webkit-transform : rotate(0deg);   }
     25%  { -webkit-transform : rotate(-3deg); }
@@ -171,12 +180,18 @@ body {
 
   // &.ani .eye {
   .eye {
+    //steps() 第一个参数将动画分割成n段，进行跳跃切换而不是线性切换
     -webkit-animation : eye 3s steps(59, start) infinite;
   }
 
   @-webkit-keyframes eye {
+     /*
+      眼睛这里主要使用多张雪碧图
+      通过切换背景图实现眼睛的动画效果
+    */
     to {
       background-position : 0px -5015px;
+      //这里用来开启gpu加速(没有进行3d旋转)
       -webkit-transform   : translate3d(0, 0, 0);
     }
   }
@@ -222,7 +237,7 @@ body {
     -webkit-transition : all 1s 0.5s;
   }
 
-  // &.ani .face {
+  //face的原理和eye一样
   .face {
     -webkit-animation : face 2s steps(40, start) infinite;
   }
