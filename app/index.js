@@ -1,4 +1,5 @@
 require('../resources/less/index.less');
+var $ = require('./jquery');
 
 /*
 	页面切换组件
